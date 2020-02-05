@@ -1,37 +1,21 @@
-package ru.job4j.vkfriendskt
+package ru.job4j.vkfriendskt.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKAccessToken
 import com.vk.api.sdk.auth.VKAuthCallback
 import com.vk.api.sdk.auth.VKScope
 
-/**
- * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
- * @version $Id$
- * @since 05.02.2020
- */
-
-
-class MainActivity : AppCompatActivity() {
-    private var fm: FragmentManager? = null
-    private var friendsListFragment: FriendListFragment = FriendListFragment()
-    private val userInfoFragment: Fragment? = null
-
+class AuthActivity : AppCompatActivity() {
     companion object {
         val TOKEN = "token"
         val USER_ID = "user_id"
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        fm = supportFragmentManager // получить FragmentManager
         VK.initialize(applicationContext)
         VK.login(this, arrayListOf(VKScope.WALL, VKScope.PHOTOS))
     }
@@ -40,16 +24,10 @@ class MainActivity : AppCompatActivity() {
         val callback = object : VKAuthCallback {
             override fun onLogin(token: VKAccessToken) {
                 // User passed authorization
-                val bundle = Bundle()
-                bundle.putString(TOKEN, token.accessToken)
-                bundle.putInt(USER_ID, token.userId!!)
-                friendsListFragment.setArguments(bundle)
-                fm?.beginTransaction()
-                    ?.add(
-                        R.id.fragment_container,
-                        friendsListFragment
-                    )
-                    ?.commit()
+                val intent = Intent(applicationContext, FriendsListActivity::class.java)
+                intent.putExtra(TOKEN,token.accessToken)
+                intent.putExtra(USER_ID,token.userId as Int)
+                startActivity(intent)
             }
 
             override fun onLoginFailed(errorCode: Int) {
@@ -60,4 +38,5 @@ class MainActivity : AppCompatActivity() {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
 }

@@ -2,10 +2,7 @@ package ru.job4j.vkfriendskt.network;
 
 
 
-import androidx.lifecycle.LiveData;
-
 import java.util.Map;
-import java.util.Set;
 
 import io.reactivex.Single;
 import retrofit2.Call;
@@ -13,7 +10,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 import retrofit2.http.QueryMap;
-import ru.job4j.vkfriendskt.model.VKUsers;
+import ru.job4j.vkfriendskt.model.GetFriendsResponse;
+import ru.job4j.vkfriendskt.model.GetUserResponse;
 
 /**
  * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
@@ -24,26 +22,22 @@ import ru.job4j.vkfriendskt.model.VKUsers;
 public interface VkApiInterface {
 
     @GET("friends.get?")
-    Single<VKUsers> getUsers(
+    Single<GetFriendsResponse> getUserFriends(
             @Query("access_token") String token,
             @Query("user_id") int userId,
             @Query("v") String v,
             @QueryMap Map<String, String> params
-
-
-
     );
 
-    @GET("friends.get?")
-    Call<VKUsers> getUsers1(
+
+    @GET("users.get?")
+    Single<GetUserResponse> getUser(
             @Query("access_token") String token,
             @Query("user_id") int userId,
             @Query("v") String v,
-            @Query("order") String order,
-            @Query("fields") String fields
-
-
+            @QueryMap Map<String, String> params
     );
+
 
 
 

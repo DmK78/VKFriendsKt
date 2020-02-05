@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.job4j.vkfriendskt.R
-import ru.job4j.vkfriendskt.model.Friend
+import ru.job4j.vkfriendskt.model.GetFriendsResponse
 
 /**
  * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
@@ -23,7 +22,7 @@ val callback: Callback
 ) :
     RecyclerView.Adapter<FriendsListAdapter.FriendsHolder>() {
 
-    private val friends: ArrayList<Friend> = ArrayList()
+    private val friends: ArrayList<GetFriendsResponse.Response.Friend> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -42,9 +41,9 @@ val callback: Callback
     override fun onBindViewHolder(holder: FriendsHolder, position: Int) {
     holder.bind(friends.get(position))}
 
-    fun setData(it: List<Friend>) {
+    fun setData(friendsList: List<GetFriendsResponse.Response.Friend>) {
         friends.clear()
-        friends.addAll(it)
+        friends.addAll(friendsList)
         notifyDataSetChanged()
     }
 
@@ -55,7 +54,7 @@ val callback: Callback
         var imageViewPhoto: ImageView= itemView.findViewById(R.id.imageView)
         var view: View = itemView
 
-        fun bind(friend: Friend) {
+        fun bind(friend: GetFriendsResponse.Response.Friend) {
 
 
             textViewFirstName.text = friend.firstName
@@ -74,7 +73,7 @@ val callback: Callback
     }
 
     interface Callback {
-        fun onItemClicked(item: Friend)
+        fun onItemClicked(item: GetFriendsResponse.Response.Friend)
     }
 
 
