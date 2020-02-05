@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
+
 public class Friend {
 
     @SerializedName("id")

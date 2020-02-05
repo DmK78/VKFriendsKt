@@ -19,6 +19,12 @@ import ru.job4j.vkfriendskt.model.Friend
 import ru.job4j.vkfriendskt.model.VKUsers
 import ru.job4j.vkfriendskt.network.NetworkServiceVk
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
+
 class FriendListFragment : Fragment() {
     val TAG = "MainActivity"
     private lateinit var viewModel: FriendsListViewModel

@@ -14,6 +14,12 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.job4j.vkfriendskt.model.VKUsers;
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
+
 public class NetworkServiceVk {
 
 

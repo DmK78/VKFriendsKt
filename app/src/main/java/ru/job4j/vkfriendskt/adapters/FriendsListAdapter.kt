@@ -12,6 +12,12 @@ import com.squareup.picasso.Picasso
 import ru.job4j.vkfriendskt.R
 import ru.job4j.vkfriendskt.model.Friend
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
+
 class FriendsListAdapter(
 val callback: Callback
 ) :

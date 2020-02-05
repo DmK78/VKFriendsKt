@@ -10,6 +10,12 @@ import com.vk.api.sdk.auth.VKAccessToken
 import com.vk.api.sdk.auth.VKAuthCallback
 import com.vk.api.sdk.auth.VKScope
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
+
 
 class MainActivity : AppCompatActivity() {
     private var fm: FragmentManager? = null
@@ -42,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     ?.add(
                         R.id.fragment_container,
                         friendsListFragment
-                    ) // добавить фрагмент в контейнер
+                    )
                     ?.commit()
             }
 
