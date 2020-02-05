@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
-public class Item {
+public class Friend {
 
     @SerializedName("id")
     @Expose
@@ -100,7 +100,7 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
+        Friend item = (Friend) o;
         return Objects.equals(id, item.id) &&
                 Objects.equals(firstName, item.firstName) &&
                 Objects.equals(lastName, item.lastName) &&

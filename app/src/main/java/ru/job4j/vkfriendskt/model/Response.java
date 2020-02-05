@@ -13,7 +13,7 @@ public class Response {
     private Integer count;
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private List<Friend> fiends = null;
 
     public Integer getCount() {
         return count;
@@ -23,12 +23,12 @@ public class Response {
         this.count = count;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Friend> getFiends() {
+        return fiends;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setFiends(List<Friend> fiends) {
+        this.fiends = fiends;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class Response {
         if (o == null || getClass() != o.getClass()) return false;
         Response response = (Response) o;
         return Objects.equals(count, response.count) &&
-                Objects.equals(items, response.items);
+                Objects.equals(fiends, response.fiends);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(count, items);
+        return Objects.hash(count, fiends);
     }
 }

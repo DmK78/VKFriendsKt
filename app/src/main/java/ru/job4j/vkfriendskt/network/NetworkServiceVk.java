@@ -14,7 +14,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.job4j.vkfriendskt.model.VKUsers;
 
-public class VK_api {
+public class NetworkServiceVk {
 
 
     private static String BASE_URL = "https://api.vk.com/method/";
@@ -23,18 +23,16 @@ public class VK_api {
     /*@GET("wall.get?domain=pro_misto&count=100&v=5.53")
     Observable<VKwall> getVkwall();*/
 
-    private VK_api() {
+    private NetworkServiceVk() {
     }
 
     public static VkApiInterface getService() {
         if (service == null) {
-/*            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();*/
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
             Retrofit retrofit = new Retrofit.Builder()
+                    .client(client)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
