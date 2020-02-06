@@ -8,6 +8,12 @@ import com.vk.api.sdk.auth.VKAccessToken
 import com.vk.api.sdk.auth.VKAuthCallback
 import com.vk.api.sdk.auth.VKScope
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
+
 class AuthActivity : AppCompatActivity() {
     companion object {
         val TOKEN = "token"
@@ -24,10 +30,7 @@ class AuthActivity : AppCompatActivity() {
         val callback = object : VKAuthCallback {
             override fun onLogin(token: VKAccessToken) {
                 // User passed authorization
-                val intent = Intent(applicationContext, FriendsListActivity::class.java)
-                intent.putExtra(TOKEN,token.accessToken)
-                intent.putExtra(USER_ID,token.userId as Int)
-                startActivity(intent)
+                startActivity(FriendsListActivity.create(this@AuthActivity, token.accessToken, token.userId))
             }
 
             override fun onLoginFailed(errorCode: Int) {

@@ -3,6 +3,11 @@ package ru.job4j.vkfriendskt.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+/**
+ * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
+ * @version $Id$
+ * @since 05.02.2020
+ */
 
 class GetUserResponse {
     @SerializedName("response")
@@ -367,6 +372,12 @@ class GetUserResponse {
         @SerializedName("class")
         @Expose
         var _class: String? = null
+
+        override fun toString(): String {
+            return "$name, Окончил(а) в $yearTo, класс $_class"
+        }
+
+
     }
     class Size {
         @SerializedName("type")
@@ -416,5 +427,11 @@ class GetUserResponse {
         @SerializedName("education_form")
         @Expose
         var educationForm: String? = null
+
+        override fun toString(): String {
+            return "$name, $facultyName, $chairName"
+        }
+
+
     }
 }

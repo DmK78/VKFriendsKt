@@ -2,7 +2,6 @@ package ru.job4j.vkfriendskt.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 /**
  * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
