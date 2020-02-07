@@ -19,7 +19,7 @@ class UserDetailsViewModel(application: Application) : AndroidViewModel(applicat
     @Inject
     lateinit var networkService: NetworkService
     init {
-        App.getComponent().injectTo(this)
+        App.getComponent()?.injectTo(this)
     }
 
     fun update(token: String, user_id: Int, v: String, params: Map<String, String>) {
