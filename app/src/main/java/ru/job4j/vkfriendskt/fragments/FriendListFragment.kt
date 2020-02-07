@@ -18,7 +18,7 @@ import ru.job4j.vkfriendskt.R
 import ru.job4j.vkfriendskt.activities.AuthActivity
 
 import ru.job4j.vkfriendskt.activities.UserDetailsActivity
-import ru.job4j.vkfriendskt.model.GetFriendsResponse
+import ru.job4j.vkfriendskt.model.user.VkUser
 import ru.job4j.vkfriendskt.viewmodels.FriendsListViewModel
 import ru.job4j.vkfriendskt.adapters.FriendsListAdapter as FriendsListAdapter1
 
@@ -31,7 +31,7 @@ import ru.job4j.vkfriendskt.adapters.FriendsListAdapter as FriendsListAdapter1
 class FriendListFragment : Fragment() {
     var token: String = ""
     var userId: Int = 0
-    lateinit var friendsListAdapter: FriendsListAdapter1
+    private lateinit var friendsListAdapter: FriendsListAdapter1
     private lateinit var viewModel: FriendsListViewModel
 
     override fun onCreateView(
@@ -41,8 +41,10 @@ class FriendListFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_user_list, container, false)
         viewModel = ViewModelProvider(this)[FriendsListViewModel::class.java]
+        setupAdapter(view)
         viewModel.getvkUsersMutableLiveData().observe(viewLifecycleOwner, Observer {
-            val friendsList = it.response?.fiends
+            val friendsList = it.response?.users
+
             friendsListAdapter.setData(friendsList!!)
         })
         arguments?.let {
@@ -54,7 +56,6 @@ class FriendListFragment : Fragment() {
         params.put("fields", "photo_100")
         params.put("count", "50")
         viewModel.update(token, userId, "5.103", params)
-        setupAdapter(view)
         return view
     }
 
@@ -62,7 +63,7 @@ class FriendListFragment : Fragment() {
         val recyclerView = view.findViewById(R.id.recyclerFriendsList) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         friendsListAdapter = FriendsListAdapter1(object : FriendsListAdapter1.Callback {
-            override fun onItemClicked(item: GetFriendsResponse.Response.Friend) {
+            override fun onItemClicked(item: VkUser) {
                 startActivity(UserDetailsActivity.create(view.context, token, item.id))
             }
         })

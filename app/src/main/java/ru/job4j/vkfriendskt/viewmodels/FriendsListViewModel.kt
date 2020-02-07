@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.job4j.vkfriendskt.App
-import ru.job4j.vkfriendskt.model.GetFriendsResponse
+import ru.job4j.vkfriendskt.model.GetFriends
 import ru.job4j.vkfriendskt.network.NetworkService
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @since 05.02.2020
  */
 class FriendsListViewModel(application: Application) : AndroidViewModel(application) {
-    private val vkUsersMutableLiveData = MutableLiveData<GetFriendsResponse>()
+    private val vkUsersMutableLiveData = MutableLiveData<GetFriends>()
     @Inject
     lateinit var networkService: NetworkService
     init {

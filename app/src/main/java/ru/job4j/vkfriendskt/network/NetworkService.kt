@@ -9,8 +9,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.job4j.vkfriendskt.model.GetFriendsResponse
-import ru.job4j.vkfriendskt.model.GetUserResponse
+import ru.job4j.vkfriendskt.model.GetFriends
+import ru.job4j.vkfriendskt.model.GetUser
 
 /**
  * @author Dmitry Kolganov (mailto:dmk78@inbox.ru)
@@ -38,13 +38,13 @@ class NetworkService {
         user_id: Int,
         v: String,
         params: Map<String, String>,
-        callback: MutableLiveData<GetFriendsResponse>
+        callback: MutableLiveData<GetFriends>
     ) {
         jSONApi.getUserFriends(token, user_id, v, params)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe(object : DisposableSingleObserver<GetFriendsResponse?>() {
-                override fun onSuccess(getFriendsResponse: GetFriendsResponse) {
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableSingleObserver<GetFriends?>() {
+                override fun onSuccess(getFriendsResponse: GetFriends) {
                     callback.postValue(getFriendsResponse)
                 }
 
@@ -57,13 +57,13 @@ class NetworkService {
         user_id: Int,
         v: String,
         params: Map<String, String>,
-        callback: MutableLiveData<GetUserResponse>
+        callback: MutableLiveData<GetUser>
     ) {
         jSONApi.getUser(token, user_id, v, params)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe(object : DisposableSingleObserver<GetUserResponse?>() {
-                override fun onSuccess(response: GetUserResponse) {
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableSingleObserver<GetUser?>() {
+                override fun onSuccess(response: GetUser) {
                     callback.postValue(response)
                 }
 
@@ -72,7 +72,7 @@ class NetworkService {
     }
 
     private val jSONApi: JSonHolderApi
-        private get() = mRetrofit.create(JSonHolderApi::class.java)
+        get() = mRetrofit.create(JSonHolderApi::class.java)
 
     companion object {
         private const val BASE_URL = "https://api.vk.com/method/"
