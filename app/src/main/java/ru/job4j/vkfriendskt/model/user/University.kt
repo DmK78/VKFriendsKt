@@ -2,8 +2,9 @@ package ru.job4j.vkfriendskt.model.user
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.lang.StringBuilder
 
-data class University (
+data class University(
     @SerializedName("id")
     @Expose
     var id: Int? = null,
@@ -37,4 +38,14 @@ data class University (
     @SerializedName("education_form")
     @Expose
     var educationForm: String? = null
-)
+
+
+) {
+    override fun toString(): String {
+        var result = StringBuilder()
+        result.append(name)
+        facultyName?.let { result.append(", $facultyName, ") }
+        chairName?.let { result.append("$chairName") }
+        return result.toString()
+    }
+}

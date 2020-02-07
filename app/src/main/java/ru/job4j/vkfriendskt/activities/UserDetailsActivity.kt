@@ -21,7 +21,7 @@ class UserDetailsActivity : BaseActivity() {
     }
 
     companion object {
-        fun create(context: Context, token: String, userId: Int?): Intent {
+        fun create(context: Context, token: String, userId: Int): Intent {
             val intent = Intent(context, UserDetailsActivity::class.java)
             intent.putExtra(AuthActivity.TOKEN,token)
             intent.putExtra(AuthActivity.USER_ID,userId)

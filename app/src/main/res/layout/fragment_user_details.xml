@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="viewmodel"
-            type="ru.job4j.vkfriendskt.viewmodels.UserDetailsViewModel" />
-
-    </data>
-
-
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="8dp">
 
     <ImageView
         android:id="@+id/iVUserPhoto_200"
+        tools:srcCompat="@tools:sample/avatars"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tVUserFirstName"
@@ -50,6 +37,7 @@
         android:id="@+id/tVUserBdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Дата рождения: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserCity" />
 
@@ -57,6 +45,7 @@
         android:id="@+id/tVUserCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Город: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserFirstName" />
 
@@ -65,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:text="Страна: "
         app:layout_constraintStart_toEndOf="@+id/tVUserCity"
         app:layout_constraintTop_toBottomOf="@+id/tVUserLastName" />
 
@@ -80,6 +70,7 @@
         android:id="@+id/tVUserContacts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Контакты: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserStatus" />
@@ -88,6 +79,7 @@
         android:id="@+id/tVUserEducation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Образование: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserContacts" />
@@ -97,6 +89,7 @@
         android:id="@+id/tVUserFollowers_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Подписчики: "
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserOnline" />
@@ -105,6 +98,7 @@
         android:id="@+id/tVUserInterests"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Интересы: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserEducation" />
@@ -113,6 +107,7 @@
         android:id="@+id/tVUserAbout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="О себе: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserUniversities" />
@@ -121,6 +116,7 @@
         android:id="@+id/tVUserStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Статус: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserBdate" />
@@ -129,6 +125,7 @@
         android:id="@+id/tVUserSchools"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Школа: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserInterests" />
@@ -137,6 +134,7 @@
         android:id="@+id/tVUserUniversities"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Университет: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserSchools" />
@@ -152,8 +150,6 @@
 
 
 
-
-</layout>
 
 
 

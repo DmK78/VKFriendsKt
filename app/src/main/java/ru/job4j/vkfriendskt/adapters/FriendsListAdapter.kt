@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_friends_list.view.*
 import ru.job4j.vkfriendskt.R
 import ru.job4j.vkfriendskt.model.user.VkUser
 
@@ -18,28 +20,28 @@ import ru.job4j.vkfriendskt.model.user.VkUser
  */
 
 class FriendsListAdapter(
-val callback: Callback
+    private val itemClick: (VkUser) -> Unit
 ) :
     RecyclerView.Adapter<FriendsListAdapter.FriendsHolder>() {
-
     private val friends: ArrayList<VkUser> = ArrayList()
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        FriendsHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_friends_list,
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FriendsListAdapter.FriendsHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_friends_list,
+            parent, false
         )
+        return FriendsListAdapter.FriendsHolder(itemView)
+    }
 
-
-    override fun getItemCount()= friends.size
-
+    override fun getItemCount() = friends.size
 
     override fun onBindViewHolder(holder: FriendsHolder, position: Int) {
-    holder.bind(friends.get(position))}
+        val currentFriend = friends[position]
+        holder.setup(currentFriend, itemClick)
+    }
 
     fun setData(friendsList: List<VkUser>) {
         friends.clear()
@@ -47,34 +49,30 @@ val callback: Callback
         notifyDataSetChanged()
     }
 
+    class FriendsHolder(
+        override val containerView: View
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-    inner class FriendsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textViewFirstName: TextView = itemView.findViewById(R.id.textViewFirstName)
-        var textViewLastName: TextView= itemView.findViewById(R.id.textViewLastName)
-        var imageViewPhoto: ImageView= itemView.findViewById(R.id.imageView)
-        var view: View = itemView
+        fun setup(vkUser: VkUser, itemClick: (VkUser) -> Unit) {
+            with(containerView) {
+                textViewFirstName.text = vkUser.firstName
+                textViewFirstName.text = vkUser.firstName
+                textViewLastName.text = vkUser.lastName
+                vkUser.photo100.let {
 
-        fun bind(friend: VkUser) {
+                    val context: Context = imageView.getContext()
+                    Picasso.with(context).load(vkUser.photo100)
+                        .into(imageView)
+                }
 
-
-            textViewFirstName.text = friend.firstName
-            textViewLastName.text = friend.lastName
-            friend.photo100.let {
-
-                val context: Context = imageViewPhoto.getContext()
-                Picasso.with(context).load(friend.photo100)
-                    .into(imageViewPhoto)
+                setOnClickListener { itemClick.invoke(vkUser) }
             }
-            itemView.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) callback.onItemClicked(friends.get(adapterPosition))
-            }
-
         }
+
+
     }
 
-    interface Callback {
-        fun onItemClicked(item: VkUser)
-    }
+
 
 
 }

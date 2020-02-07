@@ -29,8 +29,8 @@ import ru.job4j.vkfriendskt.adapters.FriendsListAdapter as FriendsListAdapter1
  */
 
 class FriendListFragment : Fragment() {
-    var token: String = ""
-    var userId: Int = 0
+    //var token: String = ""
+    //var userId: Int = 0
     private lateinit var friendsListAdapter: FriendsListAdapter1
     private lateinit var viewModel: FriendsListViewModel
 
@@ -41,32 +41,30 @@ class FriendListFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_user_list, container, false)
         viewModel = ViewModelProvider(this)[FriendsListViewModel::class.java]
-        setupAdapter(view)
+        setupAdapter(view, arguments?.getString(AuthActivity.TOKEN).toString())
         viewModel.getvkUsersMutableLiveData().observe(viewLifecycleOwner, Observer {
             val friendsList = it.response?.users
 
             friendsListAdapter.setData(friendsList!!)
         })
         arguments?.let {
-            token = arguments?.getString(AuthActivity.TOKEN).toString()
-            userId = arguments?.getInt(AuthActivity.USER_ID, 0)!!
+            //token = arguments?.getString(AuthActivity.TOKEN).toString()
+            //userId = arguments?.getInt(AuthActivity.USER_ID, 0)!!
         }
         var params: HashMap<String, String> = HashMap()
         params.put("order", "name")
         params.put("fields", "photo_100")
         params.put("count", "50")
-        viewModel.update(token, userId, "5.103", params)
+        viewModel.update(arguments?.getString(AuthActivity.TOKEN).toString(), arguments?.getInt(AuthActivity.USER_ID, 0)!!, "5.103", params)
         return view
     }
 
-    fun setupAdapter(view: View) {
+    fun setupAdapter(view: View, currentToken: String) {
         val recyclerView = view.findViewById(R.id.recyclerFriendsList) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        friendsListAdapter = FriendsListAdapter1(object : FriendsListAdapter1.Callback {
-            override fun onItemClicked(item: VkUser) {
-                startActivity(UserDetailsActivity.create(view.context, token, item.id))
-            }
-        })
+        friendsListAdapter = FriendsListAdapter1 {
+            startActivity(UserDetailsActivity.create(view.context, currentToken, it.id!!))
+        }
         recyclerView.adapter = friendsListAdapter
     }
 
