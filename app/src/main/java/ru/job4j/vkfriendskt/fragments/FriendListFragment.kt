@@ -44,18 +44,22 @@ class FriendListFragment : Fragment() {
         setupAdapter(view, arguments?.getString(AuthActivity.TOKEN).toString())
         viewModel.getvkUsersMutableLiveData().observe(viewLifecycleOwner, Observer {
             val friendsList = it.response?.users
-
-            friendsListAdapter.setData(friendsList!!)
+            friendsList?.let { friendsListAdapter.setData(it) }
         })
-        arguments?.let {
-            //token = arguments?.getString(AuthActivity.TOKEN).toString()
-            //userId = arguments?.getInt(AuthActivity.USER_ID, 0)!!
-        }
-        var params: HashMap<String, String> = HashMap()
+        /*arguments?.let {
+            token = arguments?.getString(AuthActivity.TOKEN).toString()
+            userId = arguments?.getInt(AuthActivity.USER_ID, 0)!!
+        }*/
+        val params: HashMap<String, String> = HashMap()
         params.put("order", "name")
         params.put("fields", "photo_100")
         params.put("count", "50")
-        viewModel.update(arguments?.getString(AuthActivity.TOKEN).toString(), arguments?.getInt(AuthActivity.USER_ID, 0)!!, "5.103", params)
+        viewModel.update(
+            arguments?.getString(AuthActivity.TOKEN).toString(),
+            arguments?.getInt(AuthActivity.USER_ID, 0)!!,
+            "5.103",
+            params
+        )
         return view
     }
 
