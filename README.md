@@ -22,11 +22,11 @@ This project uses:
 Kotlin, Retrofit, RX Java, Dagger
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/DmK78/VKFriendsKt/master/images/1.jpeg">
+  <img src="https://raw.githubusercontent.com/DmK78/VKFriendsKt/master/images/1.JPG">
   </p>
 
   <p align="center">
-    <img src="https://raw.githubusercontent.com/DmK78/VKFriendsKt/master/images/2.jpeg">
+    <img src="https://raw.githubusercontent.com/DmK78/VKFriendsKt/master/images/2.JPG">
     </p>
 
 
